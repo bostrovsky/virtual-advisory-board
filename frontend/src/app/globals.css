@@ -1,0 +1,288 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Primary brand colors */
+    --tt-primary: #635BFF;
+    --tt-primary-dark: #4B44C2;
+    --tt-primary-light: #857DFF;
+    --tt-secondary: #0A2540;
+    --tt-secondary-light: #1D3E5F;
+    --tt-accent: #00D4FF;
+
+    /* Background colors */
+    --tt-surface: #FFFFFF;
+    --tt-container: #F6F9FC;
+    --tt-container-dark: #E6EBF1;
+
+    /* Text colors */
+    --tt-text-primary: #1A1F36;
+    --tt-text-secondary: #697386;
+    --tt-text-disabled: #A5AFBD;
+
+    /* Border colors */
+    --tt-border-neutral: #E6EBF1;
+    --tt-border-focus: #635BFF;
+
+    /* Status colors */
+    --tt-success: #32D583;
+    --tt-info: #3E7BFA;
+    --tt-warning: #FFC107;
+    --tt-error: #FF4757;
+
+    /* Status background colors */
+    --tt-success-light: #E3F9EF;
+    --tt-info-light: #EBF2FF;
+    --tt-warning-light: #FFF8E6;
+    --tt-error-light: #FFEBEE;
+
+    /* Spacing scale */
+    --tt-space-1: 0.25rem;   /* 4px */
+    --tt-space-2: 0.5rem;    /* 8px */
+    --tt-space-3: 0.75rem;   /* 12px */
+    --tt-space-4: 1rem;      /* 16px */
+    --tt-space-5: 1.5rem;    /* 24px */
+    --tt-space-6: 2rem;      /* 32px */
+    --tt-space-7: 2.5rem;    /* 40px */
+    --tt-space-8: 3rem;      /* 48px */
+
+    /* Border radius scale */
+    --tt-radius-sm: 4px;
+    --tt-radius-md: 8px;
+    --tt-radius-lg: 12px;
+    --tt-radius-xl: 16px;
+    --tt-radius-2xl: 20px;
+    --tt-radius-full: 9999px;
+
+    /* Shadow scale */
+    --tt-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --tt-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --tt-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --tt-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  }
+
+  /* Apply professional body styling */
+  body {
+    background-color: var(--tt-container);
+    color: var(--tt-text-primary);
+  }
+}
+
+@layer components {
+  /* Chat Interface Components - Stripe-inspired */
+  .tt-chat-header {
+    @apply bg-white border-b;
+    border-color: var(--tt-border-neutral);
+    box-shadow: var(--tt-shadow-sm);
+  }
+
+  .tt-chat-container {
+    @apply flex flex-col h-screen;
+    background-color: var(--tt-container);
+  }
+
+  .tt-advisor-selector {
+    @apply inline-flex items-center px-4 py-2 text-sm font-medium rounded-full transition-all duration-150 focus:outline-none focus:ring-4;
+    border-radius: var(--tt-radius-full);
+  }
+
+  .tt-advisor-selector.active {
+    background-color: var(--tt-primary);
+    color: white;
+    box-shadow: var(--tt-shadow-md);
+  }
+
+  .tt-advisor-selector.inactive {
+    background-color: white;
+    color: var(--tt-text-secondary);
+    border: 1px solid var(--tt-border-neutral);
+  }
+
+  .tt-advisor-selector.inactive:hover {
+    background-color: var(--tt-container);
+    color: var(--tt-text-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--tt-shadow-sm);
+  }
+
+  .tt-advisor-selector:focus {
+    box-shadow: 0 0 0 4px rgba(99, 91, 255, 0.15);
+  }
+
+  .tt-message-bubble {
+    @apply px-4 py-3 max-w-xs lg:max-w-md;
+    border-radius: var(--tt-radius-xl);
+    box-shadow: var(--tt-shadow-sm);
+    transition: all 0.15s ease;
+  }
+
+  .tt-message-bubble.user {
+    background-color: var(--tt-primary);
+    color: white;
+    border-bottom-right-radius: var(--tt-radius-sm);
+  }
+
+  .tt-message-bubble.advisor {
+    background-color: white;
+    color: var(--tt-text-primary);
+    border-bottom-left-radius: var(--tt-radius-sm);
+  }
+
+  .tt-message-bubble:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--tt-shadow-md);
+  }
+
+  .tt-input-container {
+    @apply bg-white border-t p-4;
+    border-color: var(--tt-border-neutral);
+  }
+
+  .tt-input-field {
+    @apply flex-1 border px-4 py-3 text-base focus:outline-none resize-none;
+    border-color: var(--tt-border-neutral);
+    border-radius: var(--tt-radius-xl);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .tt-input-field:focus {
+    border-color: var(--tt-border-focus);
+    box-shadow: 0 0 0 4px rgba(99, 91, 255, 0.15);
+  }
+
+  .tt-send-button {
+    @apply p-3 rounded-full transition-all duration-150 focus:outline-none focus:ring-4 disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: var(--tt-primary);
+    color: white;
+    border-radius: var(--tt-radius-full);
+  }
+
+  .tt-send-button:hover:not(:disabled) {
+    background-color: var(--tt-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--tt-shadow-md);
+  }
+
+  .tt-send-button:focus {
+    box-shadow: 0 0 0 4px rgba(99, 91, 255, 0.15);
+  }
+
+  .tt-welcome-message {
+    @apply text-center mt-10;
+  }
+
+  .tt-welcome-icon {
+    @apply text-6xl mb-4;
+  }
+
+  .tt-welcome-title {
+    @apply text-2xl font-semibold mb-2;
+    color: var(--tt-text-primary);
+  }
+
+  .tt-welcome-subtitle {
+    color: var(--tt-text-secondary);
+  }
+
+  .tt-typing-indicator {
+    @apply flex items-center space-x-1;
+  }
+
+  .tt-typing-dot {
+    @apply w-2 h-2 rounded-full;
+    background-color: var(--tt-text-secondary);
+    animation: bounce 1.4s infinite ease-in-out;
+  }
+
+  .tt-typing-dot:nth-child(1) { animation-delay: -0.32s; }
+  .tt-typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+  .tt-message-timestamp {
+    @apply text-xs mt-1;
+  }
+
+  .tt-message-timestamp.user {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .tt-message-timestamp.advisor {
+    color: var(--tt-text-secondary);
+  }
+
+  .tt-advisor-name {
+    @apply text-xs font-medium mb-1;
+    color: var(--tt-primary);
+  }
+
+  /* Legacy components - keeping for compatibility */
+  .advisor-card {
+    @apply bg-white rounded-xl shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-xl;
+  }
+
+  .advisor-card.speaking {
+    @apply ring-4 ring-blue-400 shadow-2xl;
+  }
+
+  .conversation-message {
+    @apply p-3 md:p-4 rounded-lg mb-4 max-w-full md:max-w-4xl;
+  }
+
+  .conversation-message.user {
+    @apply bg-blue-50 border-l-4 border-blue-400 ml-auto;
+  }
+
+  .conversation-message.advisor {
+    @apply bg-gray-50 border-l-4 border-gray-400;
+  }
+
+  /* Mobile-optimized styles */
+  @media (max-width: 768px) {
+    .advisor-card {
+      @apply rounded-lg shadow-md;
+    }
+
+    .conversation-message {
+      @apply p-3 text-sm;
+    }
+
+    .tt-message-bubble {
+      @apply max-w-xs;
+    }
+  }
+
+  /* PWA and mobile app styles */
+  body {
+    @apply select-none md:select-text;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  input, textarea {
+    @apply select-text;
+    -webkit-user-select: text;
+  }
+
+  /* Safe area handling for iOS */
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  }
+
+  /* Animations */
+  @keyframes bounce {
+    0%, 80%, 100% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1);
+    }
+  }
+}

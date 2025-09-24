@@ -1,0 +1,33 @@
+{
+  "name": "virtual-advisory-board",
+  "version": "1.0.0",
+  "description": "AI-powered Virtual Advisory Board with OpenRouter integration",
+  "main": "app.py",
+  "scripts": {
+    "dev": "concurrently \"npm run frontend:dev\" \"npm run backend:dev\"",
+    "build": "npm run frontend:build",
+    "start": "concurrently \"npm run frontend:start\" \"npm run backend:start\"",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm install && npm run build",
+    "frontend:start": "cd frontend && npm run start",
+    "backend:dev": "cd backend && python app.py",
+    "backend:start": "cd backend && python app.py",
+    "railway:build": "npm install && cd frontend && npm install && npm run build && cd .. && pip install -r requirements.txt",
+    "railway:start": "python backend/app.py",
+    "install:all": "npm install && cd frontend && npm install && cd .. && pip install -r requirements.txt"
+  },
+  "keywords": ["ai", "advisors", "claude", "openrouter"],
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "devDependencies": {
+    "next": "^14.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "python": ">=3.9.0"
+  }
+}

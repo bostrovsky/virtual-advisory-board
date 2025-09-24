@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "virtual-advisory-board": {
+      "command": "python",
+      "args": ["/Volumes/Working_6/Virtiual_Advisory_Board/railway-production/mcp_server.py"],
+      "env": {
+        "OPENROUTER_API_KEY": "your_openrouter_api_key_here"
+      }
+    }
+  }
+}

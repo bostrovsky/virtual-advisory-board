@@ -1,0 +1,101 @@
+/* Stripe-Inspired Style Guide Variables */
+:root {
+  /* Primary brand colors */
+  --tt-primary: #635BFF;
+  --tt-primary-dark: #4B44C2;
+  --tt-primary-light: #857DFF;
+
+  /* Secondary brand colors */
+  --tt-secondary: #0A2540;
+  --tt-secondary-light: #1D3E5F;
+
+  /* Accent color */
+  --tt-accent: #00D4FF;
+
+  /* Background colors */
+  --tt-surface: #FFFFFF;
+  --tt-container: #F6F9FC;
+  --tt-container-dark: #E6EBF1;
+
+  /* Text colors */
+  --tt-text-primary: #1A1F36;
+  --tt-text-secondary: #697386;
+  --tt-text-disabled: #A5AFBD;
+
+  /* Border colors */
+  --tt-border-neutral: #E6EBF1;
+  --tt-border-focus: #635BFF;
+
+  /* Status colors */
+  --tt-success: #32D583;
+  --tt-info: #3E7BFA;
+  --tt-warning: #FFC107;
+  --tt-error: #FF4757;
+
+  /* Status background colors (lighter versions) */
+  --tt-success-light: #E3F9EF;
+  --tt-info-light: #EBF2FF;
+  --tt-warning-light: #FFF8E6;
+  --tt-error-light: #FFEBEE;
+
+  /* Font family */
+  --tt-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+  /* Font sizes */
+  --tt-font-size-xs: 0.75rem;    /* 12px */
+  --tt-font-size-sm: 0.875rem;   /* 14px */
+  --tt-font-size-md: 1rem;       /* 16px */
+  --tt-font-size-lg: 1.125rem;   /* 18px */
+  --tt-font-size-xl: 1.25rem;    /* 20px */
+  --tt-font-size-2xl: 1.5rem;    /* 24px */
+  --tt-font-size-3xl: 1.875rem;  /* 30px */
+  --tt-font-size-4xl: 2.25rem;   /* 36px */
+
+  /* Font weights */
+  --tt-font-weight-normal: 400;
+  --tt-font-weight-medium: 500;
+  --tt-font-weight-semibold: 600;
+  --tt-font-weight-bold: 700;
+
+  /* Line heights */
+  --tt-line-height-tight: 1.2;
+  --tt-line-height-normal: 1.5;
+  --tt-line-height-loose: 1.8;
+
+  /* Spacing */
+  --tt-space-1: 0.25rem;   /* 4px */
+  --tt-space-2: 0.5rem;    /* 8px */
+  --tt-space-3: 0.75rem;   /* 12px */
+  --tt-space-4: 1rem;      /* 16px */
+  --tt-space-5: 1.5rem;    /* 24px */
+  --tt-space-6: 2rem;      /* 32px */
+  --tt-space-7: 2.5rem;    /* 40px */
+  --tt-space-8: 3rem;      /* 48px */
+  --tt-space-9: 4rem;      /* 64px */
+  --tt-space-10: 5rem;     /* 80px */
+
+  /* Border radius */
+  --tt-radius-sm: 4px;
+  --tt-radius-md: 8px;
+  --tt-radius-lg: 12px;
+  --tt-radius-full: 9999px;
+
+  /* Shadows */
+  --tt-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --tt-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --tt-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --tt-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Global font family */
+body {
+  font-family: var(--tt-font-family);
+}
+
+/* Animation for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
+}
