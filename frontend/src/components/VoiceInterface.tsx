@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { VoiceState } from '@/types';
-import wsManager from '@/lib/websocket';
+import { wsManager } from '@/lib/websocket';
 
 interface VoiceInterfaceProps {
   sessionId?: string;
