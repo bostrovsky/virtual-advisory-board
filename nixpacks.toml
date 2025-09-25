@@ -3,9 +3,10 @@ nixPkgs = ["python311", "nodejs-18_x"]
 
 [phases.install]
 cmds = [
-    "python -m pip install -r requirements.txt",
+    "python3 -m pip install --upgrade pip",
+    "python3 -m pip install -r requirements.txt",
     "cd frontend && npm install && npm run build"
 ]
 
 [start]
-cmd = "python backend/app.py"
+cmd = "python3 backend/app.py"
