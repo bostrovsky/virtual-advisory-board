@@ -5,7 +5,7 @@
     "buildCommand": "echo 'Using custom nixpacks config'"
   },
   "deploy": {
-    "startCommand": "cd backend && python3 app.py",
+    "startCommand": "python3 backend/app.py",
     "healthcheckPath": "/api/health",
     "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE",
