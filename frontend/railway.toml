@@ -2,4 +2,4 @@
 builder = "NIXPACKS"
 
 [deploy]
-startCommand = "npx serve out -l 3000"
+startCommand = "npm run start"
