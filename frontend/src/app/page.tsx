@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import FileUpload from '@/components/FileUpload';
 
 const ResearchAgent = dynamic(
   () => import('../../components/ResearchAgent'),
@@ -40,6 +41,8 @@ export default function Chat() {
   const [selectedAdvisors, setSelectedAdvisors] = useState<string[]>(ADVISORS.map(a => a.id));
   const [showResearchAgent, setShowResearchAgent] = useState(false);
   const [advisorSuggestions, setAdvisorSuggestions] = useState<Array<{advisor: string; suggestion: string}>>([]);
+  const [showFileUpload, setShowFileUpload] = useState(false);
+  const [uploadedDocument, setUploadedDocument] = useState<{content: string; filename: string} | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -49,6 +52,15 @@ export default function Chat() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  const handleFileContent = (content: string, filename: string) => {
+    setUploadedDocument({ content, filename });
+    setShowFileUpload(false);
+
+    // Create a message that includes the document for review
+    const documentMessage = `Please review this document (${filename}):\n\n${content.substring(0, 500)}${content.length > 500 ? '...' : ''}\n\n[Full document provided for review]`;
+    setInputText(documentMessage);
+  };
 
   const sendMessage = async () => {
     if (!inputText.trim() || isLoading) return;
@@ -76,7 +88,8 @@ export default function Chat() {
           body: JSON.stringify({
             message: messageText,
             advisor: selectedAdvisor.id,
-            context: []
+            context: [],
+            document: uploadedDocument
           }),
         });
 
@@ -104,7 +117,8 @@ export default function Chat() {
           },
           body: JSON.stringify({
             topic: messageText,
-            advisors: selectedAdvisors
+            advisors: selectedAdvisors,
+            document: uploadedDocument
           }),
         });
 
@@ -375,8 +389,35 @@ export default function Chat() {
         <div ref={messagesEndRef} />
       </div>
 
+      {/* File Upload Area */}
+      {showFileUpload && (
+        <div className="bg-white" style={{borderTop: '1px solid var(--tt-border-neutral)', padding: 'var(--tt-space-4)'}}>
+          <FileUpload onFileContent={handleFileContent} disabled={isLoading} />
+          <button
+            onClick={() => setShowFileUpload(false)}
+            className="mt-2 text-sm text-gray-600 hover:text-gray-800"
+          >
+            Cancel
+          </button>
+        </div>
+      )}
+
       {/* Input Area */}
       <div className="bg-white" style={{borderTop: '1px solid var(--tt-border-neutral)', padding: 'var(--tt-space-4)'}}>
+        {uploadedDocument && (
+          <div className="mb-2 p-2 bg-green-50 border border-green-200 rounded-lg flex items-center justify-between">
+            <span className="text-sm text-green-700">📄 {uploadedDocument.filename}</span>
+            <button
+              onClick={() => {
+                setUploadedDocument(null);
+                setInputText('');
+              }}
+              className="text-red-500 hover:text-red-700 text-sm"
+            >
+              Remove
+            </button>
+          </div>
+        )}
         <div className="flex" style={{gap: 'var(--tt-space-3)'}}>
           <textarea
             ref={(input) => { if (input) (window as any).chatInput = input; }}
@@ -420,6 +461,14 @@ export default function Chat() {
               e.target.style.boxShadow = 'none';
             }}
           />
+          <button
+            onClick={() => setShowFileUpload(!showFileUpload)}
+            className="p-3 transition-all duration-200 hover:bg-gray-50 rounded-lg"
+            disabled={isLoading}
+            title="Upload document for review"
+          >
+            📎
+          </button>
           <button
             onClick={sendMessage}
             disabled={!inputText.trim() || isLoading}

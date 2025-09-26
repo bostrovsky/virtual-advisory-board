@@ -53,10 +53,15 @@ app.add_middleware(
 # We'll mount static files after defining routes to avoid conflicts
 
 # Request/Response models
+class DocumentContent(BaseModel):
+    content: str
+    filename: str
+
 class ChatRequest(BaseModel):
     message: str
     advisor: str = "tony"
     context: List[Dict] = []
+    document: Optional[DocumentContent] = None
 
 class ChatResponse(BaseModel):
     response: str
@@ -66,6 +71,7 @@ class ChatResponse(BaseModel):
 class PanelRequest(BaseModel):
     topic: str
     advisors: Optional[List[str]] = None
+    document: Optional[DocumentContent] = None
 
 # Advisor knowledge base
 ADVISOR_PROFILES = {
@@ -203,12 +209,18 @@ async def chat_with_advisor(request: ChatRequest):
             context_text += f"User: {msg.get('user', '')}\n"
             context_text += f"{profile['name']}: {msg.get('advisor', '')}\n"
 
+    # Add document content if provided
+    message_with_doc = request.message
+    if request.document:
+        # Include document context in the message
+        message_with_doc = f"{request.message}\n\n[Document Review: {request.document.filename}]\n{request.document.content}"
+
     # Build system prompt
     system_prompt = f"{profile['personality']}\n\n{context_text}"
 
     try:
         # Get AI response
-        response_text = await openrouter.complete(system_prompt, request.message)
+        response_text = await openrouter.complete(system_prompt, message_with_doc)
 
         return ChatResponse(
             response=response_text,
@@ -239,10 +251,15 @@ async def panel_discussion(request: PanelRequest):
     for advisor_id in selected_advisors:
         profile = ADVISOR_PROFILES[advisor_id]
 
+        # Add document context if provided
+        topic_with_doc = request.topic
+        if request.document:
+            topic_with_doc = f"{request.topic}\n\n[Document Review: {request.document.filename}]\n{request.document.content}"
+
         system_prompt = f"{profile['personality']}\n\nYou are participating in a panel discussion on: {request.topic}\n\nProvide your perspective on this topic."
 
         try:
-            response_text = await openrouter.complete(system_prompt, request.topic)
+            response_text = await openrouter.complete(system_prompt, topic_with_doc)
 
             responses.append({
                 "advisor": advisor_id,
