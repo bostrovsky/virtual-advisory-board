@@ -1,2 +1,1 @@
-release: cd frontend && npm install && npm run build
-web: python3 backend/app.py
+web: sh -c 'cd frontend && npm install && npm run build && cd .. && python3 backend/app.py'
