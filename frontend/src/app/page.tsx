@@ -3,7 +3,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import FileUpload from '@/components/FileUpload';
-import { getApiUrl } from '@/lib/api-config';
 
 const ResearchAgent = dynamic(
   () => import('../../components/ResearchAgent'),
@@ -81,7 +80,7 @@ export default function Chat() {
     try {
       if (chatMode === 'individual') {
         // Individual chat
-        const response = await fetch(getApiUrl('/api/chat'), {
+        const response = await fetch('/api/chat', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

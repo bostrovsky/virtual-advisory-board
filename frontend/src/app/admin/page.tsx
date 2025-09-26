@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { getApiUrl } from '@/lib/api-config';
 
 interface Advisor {
   id: string;
@@ -29,7 +28,7 @@ export default function AdminPanel() {
 
   const fetchAdvisors = async () => {
     try {
-      const response = await fetch(getApiUrl('/api/admin/advisors'));
+      const response = await fetch('/api/admin/advisors');
       const data = await response.json();
       setAdvisors(data.advisors);
     } catch (error) {
@@ -69,13 +68,13 @@ export default function AdminPanel() {
     try {
       let response;
       if (isCreating) {
-        response = await fetch(getApiUrl('/api/admin/advisors'), {
+        response = await fetch('/api/admin/advisors', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         });
       } else {
-        response = await fetch(getApiUrl(`/api/admin/advisors/${formData.id}`), {
+        response = await fetch(`/api/admin/advisors/${formData.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
@@ -101,7 +100,7 @@ export default function AdminPanel() {
 
     setLoading(true);
     try {
-      const response = await fetch(getApiUrl(`/api/admin/advisors/${selectedAdvisor.id}`), {
+      const response = await fetch(`/api/admin/advisors/${selectedAdvisor.id}`, {
         method: 'DELETE'
       });
 
