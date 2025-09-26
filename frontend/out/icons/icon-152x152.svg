@@ -1,0 +1,10 @@
+<svg width="152" height="152" viewBox="0 0 152 152" xmlns="http://www.w3.org/2000/svg">
+  <rect width="152" height="152" fill="#2563eb" rx="19"/>
+  <text x="50%" y="40%" text-anchor="middle" fill="white"
+        font-family="Arial, sans-serif" font-size="22.8" font-weight="bold">VA</text>
+  <text x="50%" y="65%" text-anchor="middle" fill="white"
+        font-family="Arial, sans-serif" font-size="12.16">BOARD</text>
+  <circle cx="38" cy="114" r="12.16" fill="white" opacity="0.3"/>
+  <circle cx="76" cy="114" r="12.16" fill="white" opacity="0.3"/>
+  <circle cx="114" cy="114" r="12.16" fill="white" opacity="0.3"/>
+</svg>
