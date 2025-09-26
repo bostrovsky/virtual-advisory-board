@@ -463,9 +463,19 @@ export default function Chat() {
           />
           <button
             onClick={() => setShowFileUpload(!showFileUpload)}
-            className="p-3 transition-all duration-200 hover:bg-gray-50 rounded-lg"
+            className="p-2 transition-all duration-200 hover:bg-gray-50 rounded-lg border border-gray-300"
             disabled={isLoading}
             title="Upload document for review"
+            style={{
+              marginRight: '8px',
+              backgroundColor: showFileUpload ? '#e0f2fe' : 'white',
+              fontSize: '20px',
+              minWidth: '40px',
+              height: '40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
           >
             📎
           </button>
