@@ -163,119 +163,87 @@ export default function Chat() {
   };
 
   return (
-    <div className="flex flex-col h-screen" style={{backgroundColor: 'var(--tt-container)'}}>
+    <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow-sm" style={{borderBottom: '1px solid var(--tt-border-neutral)', padding: 'var(--tt-space-4) var(--tt-space-6)'}}>
-        <div className="flex justify-between items-center" style={{marginBottom: 'var(--tt-space-5)'}}>
-          <h1 style={{fontSize: 'var(--tt-font-size-3xl)', fontWeight: 'var(--tt-font-weight-bold)', lineHeight: 'var(--tt-line-height-tight)', color: 'var(--tt-text-primary)'}}>Virtual Advisory Board</h1>
-          <div className="flex gap-2">
+      <header className="bg-white border-b border-gray-200 p-4">
+        {/* Top Row - Title and Actions */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
+            Virtual Advisory Board
+          </h1>
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setShowResearchAgent(true)}
-              className="inline-flex items-center transition-all duration-200 focus:outline-none hover:bg-gray-50"
-              style={{
-                padding: '0.5rem 1rem',
-                fontSize: 'var(--tt-font-size-sm)',
-                fontWeight: 'var(--tt-font-weight-medium)',
-                borderRadius: 'var(--tt-radius-md)',
-                backgroundColor: 'white',
-                color: 'var(--tt-text-primary)',
-                border: '1px solid var(--tt-border-neutral)',
-                cursor: 'pointer'
-              }}
+              className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
             >
-              🔬 Research
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              Research
             </button>
             <a
               href="/admin"
-              className="inline-flex items-center transition-all duration-200 focus:outline-none"
-              style={{
-                padding: '0.5rem 1rem',
-                fontSize: 'var(--tt-font-size-sm)',
-                fontWeight: 'var(--tt-font-weight-medium)',
-                borderRadius: 'var(--tt-radius-md)',
-                backgroundColor: 'white',
-                color: 'var(--tt-text-primary)',
-                border: '1px solid var(--tt-border-neutral)',
-                textDecoration: 'none'
-              }}
+              className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
             >
-              ⚙️ Admin
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              Admin
             </a>
           </div>
         </div>
 
         {/* Mode Selection */}
-        <div className="flex mb-4" style={{gap: 'var(--tt-space-3)'}}>
+        <div className="flex flex-wrap gap-2 mb-4">
           <button
             onClick={() => setChatMode('individual')}
-            className="inline-flex items-center transition-all duration-200 focus:outline-none"
-            style={{
-              padding: '0.5rem 1rem',
-              fontSize: 'var(--tt-font-size-sm)',
-              fontWeight: 'var(--tt-font-weight-medium)',
-              borderRadius: 'var(--tt-radius-md)',
-              backgroundColor: chatMode === 'individual' ? 'var(--tt-primary)' : 'white',
-              color: chatMode === 'individual' ? 'white' : 'var(--tt-text-primary)',
-              border: chatMode === 'individual' ? '1px solid var(--tt-primary)' : '1px solid var(--tt-border-neutral)',
-              boxShadow: chatMode === 'individual' ? 'var(--tt-shadow-sm)' : 'none'
-            }}
+            className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+              chatMode === 'individual'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+            }`}
           >
             Individual Chat
           </button>
           <button
             onClick={() => setChatMode('panel')}
-            className="inline-flex items-center transition-all duration-200 focus:outline-none"
-            style={{
-              padding: '0.5rem 1rem',
-              fontSize: 'var(--tt-font-size-sm)',
-              fontWeight: 'var(--tt-font-weight-medium)',
-              borderRadius: 'var(--tt-radius-md)',
-              backgroundColor: chatMode === 'panel' ? 'var(--tt-primary)' : 'white',
-              color: chatMode === 'panel' ? 'white' : 'var(--tt-text-primary)',
-              border: chatMode === 'panel' ? '1px solid var(--tt-primary)' : '1px solid var(--tt-border-neutral)',
-              boxShadow: chatMode === 'panel' ? 'var(--tt-shadow-sm)' : 'none'
-            }}
+            className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+              chatMode === 'panel'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+            }`}
           >
             Panel Discussion
           </button>
         </div>
 
+        {/* Advisor Selection */}
         {chatMode === 'individual' ? (
-          <>
-            {/* Individual Advisor Selection */}
-            <div className="flex flex-wrap mb-3" style={{gap: 'var(--tt-space-3)'}}>
+          <div>
+            <div className="flex flex-wrap gap-2 mb-2">
               {ADVISORS.map((advisor) => (
                 <button
                   key={advisor.id}
                   onClick={() => setSelectedAdvisor(advisor)}
-                  className="inline-flex items-center transition-all duration-200 focus:outline-none"
-                  style={{
-                    padding: '0.625rem 1.25rem',
-                    fontSize: 'var(--tt-font-size-sm)',
-                    fontWeight: 'var(--tt-font-weight-medium)',
-                    borderRadius: 'var(--tt-radius-full)',
-                    backgroundColor: selectedAdvisor.id === advisor.id ? 'var(--tt-primary)' : 'white',
-                    color: selectedAdvisor.id === advisor.id ? 'white' : 'var(--tt-text-primary)',
-                    border: selectedAdvisor.id === advisor.id ? '1px solid var(--tt-primary)' : '1px solid var(--tt-border-neutral)',
-                    boxShadow: selectedAdvisor.id === advisor.id ? 'var(--tt-shadow-sm)' : 'none'
-                  }}
+                  className={`px-3 py-2 text-sm font-medium rounded-full transition-colors min-h-[44px] ${
+                    selectedAdvisor.id === advisor.id
+                      ? 'bg-blue-600 text-white shadow-sm'
+                      : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                  }`}
                 >
                   {advisor.name.split(' ')[0]}
                 </button>
               ))}
             </div>
-
-            <div style={{fontSize: 'var(--tt-font-size-sm)', color: 'var(--tt-text-secondary)'}}>
-              Currently chatting with <span style={{fontWeight: 'var(--tt-font-weight-medium)', color: 'var(--tt-primary)'}}>{selectedAdvisor.name.split(' ')[0]}</span>
-            </div>
-          </>
+            <p className="text-sm text-gray-600">
+              Currently chatting with <span className="font-medium text-blue-600">{selectedAdvisor.name}</span>
+            </p>
+          </div>
         ) : (
-          <>
-            {/* Panel Advisor Selection */}
-            <div style={{fontSize: 'var(--tt-font-size-sm)', color: 'var(--tt-text-secondary)', marginBottom: 'var(--tt-space-3)'}}>
-              Select advisors for panel discussion:
-            </div>
-            <div className="flex flex-wrap mb-3" style={{gap: 'var(--tt-space-3)'}}>
+          <div>
+            <p className="text-sm text-gray-600 mb-2">Select advisors for panel discussion:</p>
+            <div className="flex flex-wrap gap-2 mb-2">
               {ADVISORS.map((advisor) => (
                 <button
                   key={advisor.id}
@@ -286,246 +254,194 @@ export default function Chat() {
                         : [...prev, advisor.id]
                     );
                   }}
-                  className="inline-flex items-center transition-all duration-200 focus:outline-none"
-                  style={{
-                    padding: '0.625rem 1.25rem',
-                    fontSize: 'var(--tt-font-size-sm)',
-                    fontWeight: 'var(--tt-font-weight-medium)',
-                    borderRadius: 'var(--tt-radius-full)',
-                    backgroundColor: selectedAdvisors.includes(advisor.id) ? 'var(--tt-primary)' : 'white',
-                    color: selectedAdvisors.includes(advisor.id) ? 'white' : 'var(--tt-text-primary)',
-                    border: selectedAdvisors.includes(advisor.id) ? '1px solid var(--tt-primary)' : '1px solid var(--tt-border-neutral)',
-                    boxShadow: selectedAdvisors.includes(advisor.id) ? 'var(--tt-shadow-sm)' : 'none'
-                  }}
+                  className={`px-3 py-2 text-sm font-medium rounded-full transition-colors min-h-[44px] ${
+                    selectedAdvisors.includes(advisor.id)
+                      ? 'bg-blue-600 text-white shadow-sm'
+                      : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                  }`}
                 >
                   {advisor.name.split(' ')[0]}
                 </button>
               ))}
             </div>
-
-            <div style={{fontSize: 'var(--tt-font-size-sm)', color: 'var(--tt-text-secondary)'}}>
-              Selected advisors: <span style={{fontWeight: 'var(--tt-font-weight-medium)', color: 'var(--tt-primary)'}}>{selectedAdvisors.length}</span> of {ADVISORS.length}
-            </div>
-          </>
+            <p className="text-sm text-gray-600">
+              Selected advisors: <span className="font-medium text-blue-600">{selectedAdvisors.length}</span> of {ADVISORS.length}
+            </p>
+          </div>
         )}
-      </div>
+      </header>
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto" style={{padding: 'var(--tt-space-4) var(--tt-space-6)', gap: 'var(--tt-space-4)', display: 'flex', flexDirection: 'column'}}>
-        {messages.length === 0 ? (
-          <div className="text-center" style={{marginTop: 'var(--tt-space-10)'}}>
-            <div style={{fontSize: '4rem', marginBottom: 'var(--tt-space-4)'}}>👋</div>
-            <div style={{fontSize: 'var(--tt-font-size-2xl)', fontWeight: 'var(--tt-font-weight-semibold)', marginBottom: 'var(--tt-space-2)', color: 'var(--tt-text-primary)'}}>Welcome to your Advisory Board!</div>
-            <div style={{color: 'var(--tt-text-secondary)'}}>
-              {chatMode === 'individual'
-                ? 'Select an advisor above and start chatting'
-                : 'Choose advisors and start a panel discussion'
-              }
+      <main className="flex-1 overflow-y-auto p-4">
+        <div className="max-w-4xl mx-auto space-y-4">
+          {messages.length === 0 ? (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">👋</div>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+                Welcome to your Advisory Board!
+              </h2>
+              <p className="text-gray-600">
+                {chatMode === 'individual'
+                  ? 'Select an advisor above and start chatting'
+                  : 'Choose advisors and start a panel discussion'
+                }
+              </p>
             </div>
-          </div>
-        ) : (
-          messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-              style={{marginBottom: 'var(--tt-space-4)'}}
-            >
-              <div className={`max-w-xs sm:max-w-md lg:max-w-lg xl:max-w-xl ${
-                message.sender === 'user' ? 'order-2' : 'order-1'
-              }`}>
-                {message.sender === 'advisor' && (
-                  <div style={{fontSize: 'var(--tt-font-size-sm)', fontWeight: 'var(--tt-font-weight-medium)', color: 'var(--tt-text-secondary)', marginBottom: 'var(--tt-space-1)'}}>
-                    {message.advisorName}
+          ) : (
+            messages.map((message) => (
+              <div
+                key={message.id}
+                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div className={`max-w-xs sm:max-w-md lg:max-w-lg xl:max-w-2xl ${
+                  message.sender === 'user' ? 'order-2' : 'order-1'
+                }`}>
+                  {message.sender === 'advisor' && (
+                    <div className="text-sm font-medium text-gray-600 mb-1">
+                      {message.advisorName}
+                    </div>
+                  )}
+                  <div
+                    className={`p-3 rounded-lg shadow-sm ${
+                      message.sender === 'user'
+                        ? 'bg-blue-600 text-white rounded-br-sm'
+                        : 'bg-white text-gray-900 border border-gray-200 rounded-bl-sm'
+                    }`}
+                  >
+                    <div className="whitespace-pre-wrap break-words text-sm sm:text-base leading-relaxed">
+                      {message.text}
+                    </div>
                   </div>
-                )}
-                <div
-                  style={{
-                    padding: 'var(--tt-space-3) var(--tt-space-4)',
-                    borderRadius: message.sender === 'user' ? 'var(--tt-radius-lg) var(--tt-radius-lg) var(--tt-radius-sm) var(--tt-radius-lg)' : 'var(--tt-radius-lg) var(--tt-radius-lg) var(--tt-radius-lg) var(--tt-radius-sm)',
-                    fontSize: 'var(--tt-font-size-md)',
-                    lineHeight: 'var(--tt-line-height-normal)',
-                    backgroundColor: message.sender === 'user' ? 'var(--tt-primary)' : 'white',
-                    color: message.sender === 'user' ? 'white' : 'var(--tt-text-primary)',
-                    border: message.sender === 'user' ? 'none' : '1px solid var(--tt-border-neutral)',
-                    boxShadow: 'var(--tt-shadow-sm)'
-                  }}
-                >
-                  <div className="whitespace-pre-wrap">{message.text}</div>
+                  <div className={`mt-1 text-xs text-gray-500 ${
+                    message.sender === 'user' ? 'text-right' : 'text-left'
+                  }`}>
+                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </div>
                 </div>
-                <div className={`mt-1 ${
-                  message.sender === 'user' ? 'text-right' : 'text-left'
-                }`} style={{fontSize: 'var(--tt-font-size-xs)', color: 'var(--tt-text-disabled)'}}>
-                  {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              </div>
+            ))
+          )}
+
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="max-w-xs sm:max-w-md lg:max-w-lg xl:max-w-2xl">
+                <div className="text-sm font-medium text-gray-600 mb-1">
+                  {chatMode === 'individual' ? selectedAdvisor.name : 'Advisors'}
+                </div>
+                <div className="bg-white border border-gray-200 rounded-lg rounded-bl-sm shadow-sm p-3">
+                  <div className="flex space-x-1">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                  </div>
                 </div>
               </div>
             </div>
-          ))
-        )}
+          )}
 
-        {isLoading && (
-          <div className="flex justify-start" style={{marginBottom: 'var(--tt-space-4)'}}>
-            <div className="max-w-xs sm:max-w-md lg:max-w-lg xl:max-w-xl">
-              <div style={{fontSize: 'var(--tt-font-size-sm)', fontWeight: 'var(--tt-font-weight-medium)', color: 'var(--tt-text-secondary)', marginBottom: 'var(--tt-space-1)'}}>
-                {selectedAdvisor.name}
-              </div>
-              <div style={{
-                backgroundColor: 'white',
-                color: 'var(--tt-text-primary)',
-                border: '1px solid var(--tt-border-neutral)',
-                borderRadius: 'var(--tt-radius-lg) var(--tt-radius-lg) var(--tt-radius-lg) var(--tt-radius-sm)',
-                boxShadow: 'var(--tt-shadow-sm)',
-                padding: 'var(--tt-space-3) var(--tt-space-4)'
-              }}>
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 rounded-full animate-bounce" style={{backgroundColor: 'var(--tt-text-disabled)'}}></div>
-                  <div className="w-2 h-2 rounded-full animate-bounce" style={{backgroundColor: 'var(--tt-text-disabled)', animationDelay: '0.1s'}}></div>
-                  <div className="w-2 h-2 rounded-full animate-bounce" style={{backgroundColor: 'var(--tt-text-disabled)', animationDelay: '0.2s'}}></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <div ref={messagesEndRef} />
-      </div>
+          <div ref={messagesEndRef} />
+        </div>
+      </main>
 
       {/* File Upload Area */}
       {showFileUpload && (
-        <div className="bg-white" style={{borderTop: '1px solid var(--tt-border-neutral)', padding: 'var(--tt-space-4)'}}>
-          <FileUpload onFileContent={handleFileContent} disabled={isLoading} />
-          <button
-            onClick={() => setShowFileUpload(false)}
-            className="mt-2 text-sm text-gray-600 hover:text-gray-800"
-          >
-            Cancel
-          </button>
+        <div className="bg-white border-t border-gray-200 p-4">
+          <div className="max-w-4xl mx-auto">
+            <FileUpload onFileContent={handleFileContent} disabled={isLoading} />
+            <button
+              onClick={() => setShowFileUpload(false)}
+              className="mt-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       )}
 
       {/* Input Area */}
-      <div className="bg-white" style={{borderTop: '1px solid var(--tt-border-neutral)', padding: 'var(--tt-space-4)'}}>
-        {uploadedDocument && (
-          <div className="mb-2 p-2 bg-green-50 border border-green-200 rounded-lg flex items-center justify-between">
-            <span className="text-sm text-green-700">📄 {uploadedDocument.filename}</span>
-            <button
-              onClick={() => {
-                setUploadedDocument(null);
-                setInputText('');
+      <footer className="bg-white border-t border-gray-200 p-4">
+        <div className="max-w-4xl mx-auto">
+          {uploadedDocument && (
+            <div className="mb-3 p-3 bg-green-50 border border-green-200 rounded-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <span className="text-sm text-green-700 flex items-center">
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                {uploadedDocument.filename}
+              </span>
+              <button
+                onClick={() => {
+                  setUploadedDocument(null);
+                  setInputText('');
+                }}
+                className="text-red-600 hover:text-red-700 text-sm font-medium transition-colors"
+              >
+                Remove
+              </button>
+            </div>
+          )}
+
+          <div className="flex gap-3">
+            <textarea
+              ref={(input) => { if (input) (window as any).chatInput = input; }}
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder={
+                chatMode === 'individual'
+                  ? `Message ${selectedAdvisor.name.split(' ')[0]}...`
+                  : 'Ask your panel of advisors a question...'
+              }
+              className="flex-1 resize-none border border-gray-300 rounded-lg px-4 py-3 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              rows={1}
+              disabled={isLoading}
+              style={{
+                minHeight: '48px',
+                maxHeight: '120px',
               }}
-              className="text-red-500 hover:text-red-700 text-sm"
+              onInput={(e) => {
+                const target = e.target as HTMLTextAreaElement;
+                target.style.height = 'auto';
+                target.style.height = Math.min(target.scrollHeight, 120) + 'px';
+              }}
+            />
+
+            <button
+              onClick={() => setShowFileUpload(!showFileUpload)}
+              disabled={isLoading}
+              title="Upload document for review"
+              className={`flex items-center justify-center w-12 h-12 rounded-lg border transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+                showFileUpload
+                  ? 'bg-blue-50 border-blue-300 text-blue-600'
+                  : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-50'
+              }`}
             >
-              Remove
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+              </svg>
+            </button>
+
+            <button
+              onClick={sendMessage}
+              disabled={!inputText.trim() || isLoading}
+              className="flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
             </button>
           </div>
-        )}
-        <div className="flex" style={{gap: 'var(--tt-space-3)'}}>
-          <textarea
-            ref={(input) => { if (input) (window as any).chatInput = input; }}
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder={
-              chatMode === 'individual'
-                ? `Message ${selectedAdvisor.name.split(' ')[0]}...`
-                : 'Ask your panel of advisors a question...'
-            }
-            className="flex-1 resize-none transition-all duration-200 focus:outline-none"
-            rows={1}
-            disabled={isLoading}
-            style={{
-              border: '1px solid var(--tt-border-neutral)',
-              borderRadius: 'var(--tt-radius-lg)',
-              padding: '0.625rem 0.75rem',
-              fontSize: 'var(--tt-font-size-md)',
-              minHeight: '48px',
-              maxHeight: '120px',
-              backgroundColor: 'var(--tt-container)',
-              ...(isLoading && {
-                opacity: '0.5',
-                cursor: 'not-allowed'
-              })
-            }}
-            onInput={(e) => {
-              const target = e.target as HTMLTextAreaElement;
-              target.style.height = 'auto';
-              target.style.height = Math.min(target.scrollHeight, 120) + 'px';
-            }}
-            onFocus={(e) => {
-              e.target.style.borderColor = 'var(--tt-border-focus)';
-              e.target.style.backgroundColor = 'white';
-              e.target.style.boxShadow = '0 0 0 4px rgba(99, 91, 255, 0.15)';
-            }}
-            onBlur={(e) => {
-              e.target.style.borderColor = 'var(--tt-border-neutral)';
-              e.target.style.backgroundColor = 'var(--tt-container)';
-              e.target.style.boxShadow = 'none';
-            }}
-          />
-          <button
-            onClick={() => setShowFileUpload(!showFileUpload)}
-            className="p-2 transition-all duration-200 hover:bg-gray-100 rounded-lg border border-gray-300"
-            disabled={isLoading}
-            title="Upload document for review"
-            style={{
-              marginRight: '8px',
-              backgroundColor: showFileUpload ? '#e0f2fe' : 'white',
-              fontSize: '14px',
-              minWidth: '44px',
-              height: '44px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: '500',
-              color: showFileUpload ? '#0369a1' : '#6b7280'
-            }}
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
-            </svg>
-          </button>
-          <button
-            onClick={sendMessage}
-            disabled={!inputText.trim() || isLoading}
-            className="transition-all duration-200 focus:outline-none"
-            style={{
-              padding: 'var(--tt-space-3)',
-              borderRadius: 'var(--tt-radius-full)',
-              backgroundColor: (!inputText.trim() || isLoading) ? 'var(--tt-text-disabled)' : 'var(--tt-primary)',
-              color: 'white',
-              border: 'none',
-              cursor: (!inputText.trim() || isLoading) ? 'not-allowed' : 'pointer',
-              boxShadow: (!inputText.trim() || isLoading) ? 'none' : 'var(--tt-shadow-sm)'
-            }}
-            onMouseEnter={(e) => {
-              if (!(!inputText.trim() || isLoading)) {
-                e.currentTarget.style.backgroundColor = 'var(--tt-primary-dark)';
-                e.currentTarget.style.transform = 'translateY(-1px)';
-                e.currentTarget.style.boxShadow = 'var(--tt-shadow-md)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!(!inputText.trim() || isLoading)) {
-                e.currentTarget.style.backgroundColor = 'var(--tt-primary)';
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'var(--tt-shadow-sm)';
-              }
-            }}
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-            </svg>
-          </button>
         </div>
-      </div>
+      </footer>
 
       {/* Research Agent Modal */}
       {showResearchAgent && (
