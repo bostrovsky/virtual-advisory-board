@@ -463,21 +463,34 @@ export default function Chat() {
           />
           <button
             onClick={() => setShowFileUpload(!showFileUpload)}
-            className="p-2 transition-all duration-200 hover:bg-gray-50 rounded-lg border border-gray-300"
+            className="p-2 transition-all duration-200 hover:bg-gray-100 rounded-lg border border-gray-300"
             disabled={isLoading}
             title="Upload document for review"
             style={{
               marginRight: '8px',
               backgroundColor: showFileUpload ? '#e0f2fe' : 'white',
-              fontSize: '20px',
-              minWidth: '40px',
-              height: '40px',
+              fontSize: '14px',
+              minWidth: '44px',
+              height: '44px',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              fontWeight: '500',
+              color: showFileUpload ? '#0369a1' : '#6b7280'
             }}
           >
-            📎
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+            </svg>
           </button>
           <button
             onClick={sendMessage}
